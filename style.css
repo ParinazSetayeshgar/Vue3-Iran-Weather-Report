@@ -24,6 +24,10 @@ h1 {
 }
 
 .climate {
-    grid-column: 2/4;
+    grid-column: 1/-1;
     grid-row: 4/5;
+}
+
+.climate {
+    width: 100%;
 }
