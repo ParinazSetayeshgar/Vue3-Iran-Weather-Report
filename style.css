@@ -22,3 +22,8 @@ h1 {
     grid-column: 2/4;
     grid-row: 2/3;
 }
+
+.climate {
+    grid-column: 2/4;
+    grid-row: 4/5;
+}
