@@ -2,6 +2,13 @@
     font-family: Pattaya-Regular;
     src: url(./assets/Pattaya-Regular.ttf);
 }
+
 * {
     font-family: Pattaya-Regular;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1 fr);
+    grid-template-rows: repeat(6, 1 fr);
 }
