@@ -14,9 +14,5 @@ fetch('http://api.openweathermap.org/data/2.5/weather?q=Tehran&units=metric&appi
         weatherReport.innerHTML = climate.weather[0].description;
 
         //showing temperature in Celsius
-        temperatureReport.innerHTML = Math.floor(climate.main.temp);
-        
-        //showing icon
-        var iconSrc = "http://openweathermap.org/img/wn/" + climate.weather[0].icon + "@2x.png"
-        climateIcon.setAttribute("src", iconSrc);
+        temperatureReport.innerHTML = Math.floor(climate.main.temp) + "&#176;c";
     });
