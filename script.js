@@ -1,7 +1,6 @@
 //storing .weather, .temperature elements & #Icon
 var weatherReport = document.querySelector(".weather");
 var temperatureReport = document.querySelector(".temperature");
-var climateIcon = document.querySelector("#icon");
 
 //calling API
 fetch('http://api.openweathermap.org/data/2.5/weather?q=Tehran&units=metric&appid=59047e5b5fb99d3b3a17ffa14fe1730d')

@@ -12,7 +12,7 @@ html {
 
 body {
     min-height: 100vh ;
-    background-image: url(./day.jpg);
+    background-image: url(./Images/day.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -107,7 +107,7 @@ footer {
 
 @media (min-width: 481px) and (max-width: 767px) {
     body {
-        background-image: url(./day_mobile.jpg);
+        background-image: url(./Images/day_mobile.jpg);
         background-size: conver;
         background-repeat: no-repeat;
         background-attachment: fixed;
