@@ -1,61 +1,138 @@
-@font-face {
-    font-family: HindSiliguri-Medium;
-    src: url(./Font/HindSiliguri-Medium.ttf);
-}
-
 * {
-    font-family: Pattaya-Regular;
+    font-family: 'Roboto';
     margin: 0;
     padding: 0;
-    color: rgb(83, 77, 77);
+    color: whitesmoke;
 }
 
-html, body {
-    height: 100vh ;
+html {
+    height: 100%;
+    overflow: auto;
+}
+
+body {
+    min-height: 100vh ;
+    background-image: url(./day.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    position: relative;
 }
 
 header {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
+    font-size: 4rem;
+    height: 100px;
+    padding: 20px;
 }
 
-header, footer {
-    height: 25vh;
-}
-
-.container {
-    height: 100vh;
+.info {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    background: linear-gradient(to bottom, #87d0ec 0%,#469ddf 100%);
-}
-
-.climate {
-    height: 50vh;
-    width: 50%;
-    display: flex;
     align-items: center;
-    justify-content: space-around;
-    font-size: 2rem;
-    border: transparent solid 1px;
-    background-color: rgba(208, 208, 220, 0.2);
-    border-radius: 3%;
 }
 
-.element {
+.today {
+    font-size: 1.75rem;
+}
+
+.time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.icons {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 100%;
+}
+
+.icon {
     visibility: hidden;
-    height: 50px;
-    width: 50px;
-    margin: 10px;
-   }
-   
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 20%;
+    width: 20%;
+}
+
+.report {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 30px;
+    
+}
+.temperature {
+    font-size:5rem;
+}
+
+.weather {
+    font-size: 3rem;
+}
+
+footer {
+    text-align: center;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 1.5rem; 
+}
+
 .white {fill:#FFFFFF}
 
 .gray {fill:#E0E0E0}
 
 .yellow {fill:#FFEB3B}
 
+@media (min-width: 481px) and (max-width: 767px) {
+    body {
+        background-image: url(./day_mobile.jpg);
+        background-size: conver;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center center;
+        overflow: scroll;
+    }    
 
+    header {
+        font-size:3rem;
+    }
+
+    .today {
+        font-size: 1.25rem;
+    }
+
+    .icon {
+        width: 30%;
+        height: 30%;
+    }
+    
+    .temperature {
+        font-size:4rem;
+    }
+    
+    .weather {
+        font-size: 2rem;
+    }
+}
