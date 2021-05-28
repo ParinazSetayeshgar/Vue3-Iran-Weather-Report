@@ -12,12 +12,39 @@ html {
 
 body {
     min-height: 100vh ;
+    position: relative;
+}
+
+.day {
     background-image: url(./Images/day.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
-    position: relative;
+}
+
+.day-mobile {
+    background-image: url(./Images/day_mobile.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+.night {
+    background-image: url(./Images/night.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+.night-mobile {
+    background-image: url(./Images/night_mobile.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
 }
 
 header {
@@ -39,6 +66,10 @@ header {
     font-size: 1.75rem;
 }
 
+.container {
+    height: 100vh;
+}
+
 .time {
     display: flex;
     justify-content: center;
@@ -52,7 +83,7 @@ main {
     align-items: center;
 }
 
-.icons {
+.icons, svg {
     position: relative;
     display: flex;
     justify-content: center;
@@ -69,7 +100,7 @@ main {
     align-items: center;
     height: 20%;
     width: 20%;
-}
+   }
 
 .report {
     display: flex;
@@ -78,7 +109,7 @@ main {
     align-items: center;
     padding: 20px;
     margin: 30px;
-    
+
 }
 .temperature {
     font-size:5rem;
@@ -106,15 +137,6 @@ footer {
 .yellow {fill:#FFEB3B}
 
 @media (min-width: 481px) and (max-width: 767px) {
-    body {
-        background-image: url(./Images/day_mobile.jpg);
-        background-size: conver;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center center;
-        overflow: scroll;
-    }    
-
     header {
         font-size:3rem;
     }
@@ -127,11 +149,11 @@ footer {
         width: 30%;
         height: 30%;
     }
-    
+
     .temperature {
         font-size:4rem;
     }
-    
+
     .weather {
         font-size: 2rem;
     }
