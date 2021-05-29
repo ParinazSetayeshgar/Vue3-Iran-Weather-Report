@@ -16,7 +16,7 @@ Flexbox features are used to code responsive layout. Madia query is also used fo
 Background image will be changed after sunset or sunrise. Daytime or night-time determines the change & this is performed by comparing current time (obtained by Date() constructor) & sunset time which is included in API response.
 Animated weather icons code in the link below has been used for showing weather icons:
 https://codepen.io/WaelYasmina/pen/brgNYK
-They appear according to icon code in API response.
+(They appear according to icon code in API response.)
 
 
 What do you need to do for ruuning this project?
