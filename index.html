@@ -5,135 +5,192 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <link rel="shortcut icon" href="./assests/thermometer.ico" type="image/x-icon"> 
     <title>Tehran Current Weather</title>
+    
+
 </head>
 <body>
-    <header>
-        <div class="info">
-            <div class="tehran">Tehran</div>
-            <div class="today"></div>
-        </div>
-        <div class="time"></div>
-    </header>
-    <main>
-        <div class="icon">
-                <img alt="weather icon">
-        </div>
-        <div class="report">
-            <div class="temperature"></div>
-            <div class="weather"></div>
-        </div>
-    </main>
-    <footer>
-        Developed By Parinaz Setayeshgar
-    </footer>
+    <div id="app">
+
+        <header>
+            <info :date="date"></info>
+
+            <time :date="date"></time>
+        </header>
+
+        <climate></climate>
+
+        <footer>
+            Developed By Parinaz Setayeshgar
+        </footer>
+
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
     <script type="text/javascript">
-    //storing elements
-        var today = document.querySelector(".today");
-        var time = document.querySelector(".time");
 
-        var icon = document.querySelector("img");
+        const app = Vue.createApp({
 
-        var weatherReport = document.querySelector(".weather");
-        var temperatureReport = document.querySelector(".temperature");
+            data() {
 
-        //Declaring function for defining background image
-        function backgroundImg (currentHour, currentMinutes, sunsetHour, sunsetMinutes) {
-        let mediaQuery = window.matchMedia('(min-width: 481px) and (max-width: 767px)');
-        if (mediaQuery.matches) {
-            if (currentHour == sunsetHour) {
-                if ( currentMinutes > sunsetMinutes) {
-                    document.body.className = "night-mobile";
-                } else {
-                    document.body.className = "day-mobile";
+                return {
+                    date: null
                 }
-            } else if (currentHour > sunsetHour) {
-                document.body.className = "night-mobile";
-            } else {
-                document.body.className = "day-mobile";
+            },
+
+            mounted() {
+
+                let currentDate = new Date();
+                this.date = currentDate.toString().split(" ");
+
             }
-        } else {
-            if (currentHour == sunsetHour) {
-                if ( currentMinutes > sunsetMinutes) {
-                    document.body.className = "night";
-                } else {
-                    document.body.className = "day";
+
+        }).mount('#app');
+
+        app.component('info', {
+
+            props: {
+
+                date: {
+                    type: String,
+                    required: true
                 }
-            } else if (currentHour > sunsetHour) {
-                document.body.className = "night";
-            } else {
-                document.body.className = "day";
+
+            },
+
+            template: `
+                <div class="info">
+                    <div class="tehran">Tehran</div>
+                    <div class="today">{{ dateOfToday }}</div>
+                </div>
+            `,
+
+            computed: {
+
+                dateOfToday() {
+                    return this.date.slice(4).join(" ");
+                }
             }
-        }
-        }
 
-        //calling API
-        fetch('http://api.openweathermap.org/data/2.5/weather?q=Tehran&units=metric&appid=59047e5b5fb99d3b3a17ffa14fe1730d')
-
-        .then(response => response.json()) //creating climate object
-
-        .then(function(climate) {
-            //defining date of today & current time
-            let dateOfToday = new Date()
-            let dateOfTodayArray = dateOfToday.toString().split(" ");
-            for (let i=0 ; i<4 ; i++) {
-                today.innerHTML += dateOfTodayArray[i] + " ";
-            }
-            let timeArray = dateOfTodayArray[4].toString().split(":");
-            time.innerHTML = timeArray[0] + ":" + timeArray[1] ;
-
-            //Defining sunset time
-            let unixTime = new Date(climate.sys.sunset * 1000);
-            let sunsetH = unixTime.getHours();
-            let sunsetM = unixTime.getMinutes();
-
-            //background image change
-            backgroundImg (timeArray[0], timeArray[1], sunsetH, sunsetM);
-            
-            //showing weather description
-            weatherReport.innerHTML = climate.weather[0].description;
-
-            //showing temperature in Celsius
-            temperatureReport.innerHTML = Math.floor(climate.main.temp) + "&#176;c";
-
-            //showing icons
-            switch(climate.weather[0].icon) {
-            case "01d":
-                icon.src = "./assests/sun.png";
-                break;
-            case "01n":
-                icon.src = "./assests/moon.png";
-                break;
-            case "02d":
-                icon.src = "./assests/sun & cloud.png";
-                break;
-            case "02n":
-                icon.src = "./assests/moon & cloud.png";
-                break;
-            case "03d":
-            case "03n":
-            case "04d":
-            case "04n":
-                icon.src = "./assests/clouds.png";
-                break;
-            case "09d":
-            case "09n":
-            case "10d":
-            case "10n":
-                icon.src = "./assests/rain.png";
-            case "11d":
-            case "11n":
-                icon.src = "./assests/lightning.png";
-                break;
-            case "13d":
-            case "13n":
-                icon.src = "./assests/snowy.png";
-                break;
-            case "50d":
-            default:
-                icon.src = "./assests/mist.png";
-        }
-            
         });
+
+        app.component('time', {
+
+            props: {
+
+                date: {
+                    type: String,
+                    required: true
+                }
+
+            },
+
+            template: `
+                <div class="time">{{ timeHour + ":" + timeMinutes }}</div>
+            `,
+
+            computed: {
+
+                timeHour() {
+                    return this.date[4].split(":")[0];
+                },
+
+                timeMinutes() {
+                    return this.date[4].split(":")[1];
+                }
+            }
+
+        });
+
+        Vue.component('climate', {
+
+            template:`
+                <main>
+                    <div class="icon">
+                            <img :src="iconSource"alt="weather icon">
+                    </div>
+                    <div class="report">
+                        <div class="temperature">{{ temperature }}</div>
+                        <div class="weather">{{ weatherDescription }}</div>
+                    </div>
+                </main>
+            `,
+
+            data () {
+
+                return {
+
+                    jsonResponse: null,
+
+                    iconList: {
+
+                        '01d' : "./assests/sun.png",
+
+                        '01n' : "./assests/moon.png",
+
+                        '02d' : "./assests/sun & cloud.png",
+
+                        '02n' : "./assests/moon & cloud.png",
+                
+                        '03d' : "./assests/clouds.png",
+
+                        '03n' : "./assests/clouds.png",
+
+                        '04d' : "./assests/clouds.png",
+
+                        '04n' : "./assests/clouds.png",
+
+                        '09d' : "./assests/rain.png",
+
+                        '09n' : "./assests/rain.png",
+
+                        '10d' : "./assests/rain.png",
+
+                        '10n' : "./assests/rain.png",
+
+                        '11d' : "./assests/lightning.png",
+
+                        '11n' : "./assests/lightning.png",
+
+                        '13d' : "./assests/snowy.png",
+
+                        '13n' : "./assests/snowy.png",
+
+                        '50d' : "./assests/mist.png"
+            
+                    }
+            
+                }
+
+            },
+
+            mounted () {
+
+                axios
+                .get('http://api.openweathermap.org/data/2.5/weather?q=Tehran&units=metric&appid=59047e5b5fb99d3b3a17ffa14fe1730d')
+                .then(response => this.jsonResponse = response.json());
+
+            },
+            
+            computed: {
+                
+                wheatherDescription() {
+                    return this.jsonResponse.weather[0].description;
+                },
+
+                iconSource() {
+                    let icon = this.jsonResponse.weather[0].icon;
+                    return this.iconList.icon.source;
+                },
+
+                temperature() {
+                    return  Math.floor(jsonResponse.main.temp) + "&#176;c";
+                }
+
+            }
+
+        });
+
     </script>
+    
 </body>
 </html>
