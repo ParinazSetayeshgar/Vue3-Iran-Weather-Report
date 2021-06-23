@@ -1,7 +1,6 @@
 On this branch:
 The project in the main branch is converting to Vue3 project.
 Converting has been done through Vue CLI & SFC concepts.
-===========================================================
 For ruuning the project:
 1) Installing packages in dependency section of package.json file is required.
 2) After cloning, Two ways are available:
