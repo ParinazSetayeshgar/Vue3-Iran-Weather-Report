@@ -3,15 +3,15 @@
         
         <div class="icon">
 
-                <img :src="iconList[iconCode]" alt="weather icon">
+                <img :src="iconList[weather.iconCode]" alt="weather icon">
 
         </div>
 
         <div class="report">
 
-            <div class="temperature">{{ temperature }}</div>
+            <div class="temperature">{{ weather.temp + "&#176;c" }}</div>
 
-            <div class="weather">{{ weatherDescription }}</div>
+            <div class="weather">{{ weather.description }}</div>
 
         </div>
 
@@ -27,62 +27,56 @@ export default {
 
         return {
 
-            APIResponse: null,
+            weather: {},
             
             iconList: {
-                '01d' : "../assets/sun.png",
-                '01n' : "../assets/moon.png",
-                '02d' : "../assets/sun & cloud.png",
-                '02n' : "../assets/moon & cloud.png",
-                '03d' : "../assets/clouds.png",
-                '03n' : "../assets/clouds.png",
-                '04d' : "../assets/clouds.png",
-                '04n' : "../assets/clouds.png",
-                '09d' : "../assets/rain.png",
-                '09n' : "../assets/rain.png",
-                '10d' : "../assets/rain.png",
-                '10n' : "../assets/rain.png",
-                '11d' : "../assets/lightning.png",
-                '11n' : "../assets/lightning.png",
-                '13d' : "../assets/snowy.png",
-                '13n' : "../assets/snowy.png",
-                '50d' : "../assets/mist.png"
+                '01d' : require("../assets/sun.png"),
+                '01n' : require("../assets/moon.png"),
+                '02d' : require("../assets/sun & cloud.png"),
+                '02n' : require("../assets/moon & cloud.png"),
+                '03d' : require("../assets/clouds.png"),
+                '03n' : require("../assets/clouds.png"),
+                '04d' : require("../assets/clouds.png"),
+                '04n' : require("../assets/clouds.png"),
+                '09d' : require("../assets/rain.png"),
+                '09n' : require("../assets/rain.png"),
+                '10d' : require("../assets/rain.png"),
+                '10n' : require("../assets/rain.png"),
+                '11d' : require("../assets/lightning.png"),
+                '11n' : require("../assets/lightning.png"),
+                '13d' : require("../assets/snowy.png"),
+                '13n' : require("../assets/snowy.png"),
+                '50d' : require("../assets/mist.png")
             }
 
         }
 
     },
 
+    mounted() {
+
+      this.getWeather();
+
+    },
+
     methods: {
 
-        fetchData(url) {
-            fetch(url).then((response) => this.APIResponse = response.data)
-        },
+        async getWeather() {
+        let self = this;
 
-    },
+            try {
+                const response = await fetch('http://api.openweathermap.org/data/2.5/weather?q=Tehran&units=metric&appid=59047e5b5fb99d3b3a17ffa14fe1730d');
+                const myJson = await response.json();
+                self.weather.description = myJson.weather[0].description;
+                self.weather.iconCode = myJson.weather[0].icon;
+                self.weather.temp = Math.floor(myJson.main.temp);
+            } catch (error) {
+                alert('Check your network connection or refresh the page later.');
+            }
 
-    mounted () {
-
-        this.fetchData('http://api.openweathermap.org/data/2.5/weather?q=Tehran&units=metric&appid=59047e5b5fb99d3b3a17ffa14fe1730d')
-
-    },
-
-    computed: {
-
-        weatherDescription() {
-            return this.APIResponse.weather[0].description;
-        },
-
-        iconCode() {
-            return this.APIResponse.weather[0].icon;
-        },
-
-        temperature() {
-            return  Math.floor(this.APIResponse.main.temp) + "&#176;c";
         }
 
     },
-
 
 }
 </script>
