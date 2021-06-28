@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import $store from '../store/store';
 export default {
 
     name: 'climate',
@@ -62,16 +63,25 @@ export default {
     methods: {
 
         async getWeather() {
+
         let self = this;
 
             try {
+
                 const response = await fetch('http://api.openweathermap.org/data/2.5/weather?q=Tehran&units=metric&appid=59047e5b5fb99d3b3a17ffa14fe1730d');
                 const myJson = await response.json();
                 self.weather.description = myJson.weather[0].description;
                 self.weather.iconCode = myJson.weather[0].icon;
                 self.weather.temp = Math.floor(myJson.main.temp);
+
+                $store.commit('defineSunsetHours', myJson.sys.sunset);
+                $store.commit('defineSunsetMinutes', myJson.sys.sunset);
+                
+
             } catch (error) {
+
                 alert('Check your network connection or refresh the page later.');
+
             }
 
         }
@@ -82,38 +92,6 @@ export default {
 </script>
 
 <style scoped>
-.day {
-    background-image: url('../assets/day.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
-}
-
-.day-mobile {
-    background-image: url('../assets/day_mobile.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
-}
-
-.night {
-    background-image: url('../assets/night.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
-}
-
-.night-mobile {
-    background-image: url('../assets/night_mobile.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
-}
-
 main {
     display: flex;
     flex-direction: column;

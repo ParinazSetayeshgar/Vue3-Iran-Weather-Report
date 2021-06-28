@@ -3,9 +3,9 @@
 
     <header>
 
-      <info :date="date"></info>
+      <info></info>
 
-      <currentTime :date="date"></currentTime>
+      <currentTime></currentTime>
     
     </header>
 
@@ -22,19 +22,13 @@
 import info from './components/info.vue';
 import currentTime from './components/currentTime.vue';
 import climate from './components/climate.vue'
+import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
+import $ from 'jQuery';
 
 export default {
 
   name: 'App',
-
-  computed: {
-    
-    date() {
-      let currentDate = new Date();
-      return currentDate.toString().split(" ");
-    }
-
-  },
 
   components: {
 
@@ -42,7 +36,63 @@ export default {
     currentTime,
     climate
 
-  }
+  },
+
+  computed: {
+
+    ...mapState([
+      'sunsetHours',
+      'sunsetMinutes'
+    ]),
+
+    ...mapGetters([
+      'getcurrentHours',
+      'getcurrentMinutes',
+    ])
+
+  },
+
+  methods: {
+
+    defineBackgroundImage() {
+
+      if (this.getcurrentHours < this.getSunsetHours) {
+
+        $('body').addClass('day');
+
+      } else if (this.getcurrentHours == this.getSunsetHours) {
+
+        if (this.getcurrentMinutes < this.getSunsetMinutes) {
+
+          $('body').addClass('day');
+
+        } else {
+
+          $('body').addClass('night');
+
+        }
+
+      } else {
+
+        $('body').addClass('night');
+
+      }
+
+    }
+
+  },
+
+  watch: {
+
+    sunsetMinutes() {
+      this.defineBackgroundImage();
+    },
+
+    sunsetMinutess() {
+      this.defineBackgroundImage();
+    }
+
+}
 
 }
 </script>
@@ -54,7 +104,7 @@ export default {
     font-family: 'Roboto';
     margin: 0;
     padding: 0;
-    color: black;
+    color: whitesmoke;
 }
 
 html {
@@ -65,6 +115,22 @@ html {
 body {
     min-height: 100vh ;
     position: relative;
+}
+
+.day {
+    background-image: url('./assets/day.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+.night {
+    background-image: url('./assets/night.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
 }
 
 header {

@@ -1,34 +1,23 @@
 <template>
     <div class="time">
 
-        {{ timeHour + ":" + timeMinutes }}
+        {{ getcurrentHours + ":" + getcurrentMinutes }}
         
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
 
     name: 'currentTime',
 
-    props: {
-
-        date: {
-            type: Array,
-            required: true
-        }
-
-    },
-
     computed: {
 
-        timeHour() {
-            return this.date[4].split(":")[0];
-        },
-
-        timeMinutes() {
-            return this.date[4].split(":")[1];
-        }
+        ...mapGetters([
+            'getcurrentHours',
+            'getcurrentMinutes'
+        ])
 
     }
 

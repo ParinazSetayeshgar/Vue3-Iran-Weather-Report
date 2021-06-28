@@ -3,30 +3,22 @@
 
     <div class="tehran">Tehran</div>
 
-    <div class="today">{{ dateOfToday }}</div>
+    <div class="today">{{ getDate }}</div>
 
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
 
   name: 'info',
 
-  props: {
-
-    date: {
-        type: Array,
-        required: true
-    }
-
-  },
-
   computed: {
 
-    dateOfToday() {
-        return this.date.slice(0,4).join(" ");
-    }
+    ...mapGetters([
+      'getDate'
+    ])
 
   }
   
