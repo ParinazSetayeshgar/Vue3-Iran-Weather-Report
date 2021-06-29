@@ -1,30 +1,28 @@
 <template>
-  <div>
+    <div>
 
-    <header>
+      <header>
 
-      <info></info>
+        <info></info>
 
-      <currentTime></currentTime>
-    
-    </header>
+        <currentTime></currentTime>
 
-    <climate></climate>  
+      </header>
 
-    <footer>
-        Developed By Parinaz Setayeshgar
-    </footer>
+      <climate></climate>  
 
-  </div>
+      <footer>
+          Developed By Parinaz Setayeshgar
+      </footer>
+
+    </div>
 </template>
 
 <script>
 import info from './components/info.vue';
 import currentTime from './components/currentTime.vue';
 import climate from './components/climate.vue'
-import { mapGetters } from 'vuex';
-import { mapState } from 'vuex';
-import $ from 'jQuery';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
 
@@ -41,13 +39,14 @@ export default {
   computed: {
 
     ...mapState([
-      'sunsetHours',
-      'sunsetMinutes'
+        'sunsetHours',
+        'sunsetMinutes',
+        'isDayTime'
     ]),
 
     ...mapGetters([
-      'getcurrentHours',
-      'getcurrentMinutes',
+        'getcurrentHours',
+        'getcurrentMinutes',
     ])
 
   },
@@ -56,25 +55,25 @@ export default {
 
     defineBackgroundImage() {
 
-      if (this.getcurrentHours < this.getSunsetHours) {
+      if (this.getcurrentHours < this.sunsetHours) {
 
-        $('body').addClass('day');
+          document.body.className = 'day';
 
-      } else if (this.getcurrentHours == this.getSunsetHours) {
+      } else if (this.getcurrentHours == this.sunsetHours) {
 
-        if (this.getcurrentMinutes < this.getSunsetMinutes) {
+        if (this.getcurrentMinutes < this.sunsetMinutes) {
 
-          $('body').addClass('day');
+            document.body.className = 'day';
 
         } else {
 
-          $('body').addClass('night');
+            document.body.className = 'night';
 
         }
 
       } else {
 
-        $('body').addClass('night');
+          document.body.className = 'night';
 
       }
 
@@ -82,17 +81,23 @@ export default {
 
   },
 
+  mounted() {
+    this.$store.dispatch('getWeather');
+  },
+
+  
+
   watch: {
 
     sunsetMinutes() {
-      this.defineBackgroundImage();
+        this.defineBackgroundImage();
     },
 
     sunsetMinutess() {
-      this.defineBackgroundImage();
+        this.defineBackgroundImage();
     }
 
-}
+  }
 
 }
 </script>

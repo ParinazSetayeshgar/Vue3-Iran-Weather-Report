@@ -3,15 +3,15 @@
         
         <div class="icon">
 
-                <img :src="iconList[weather.iconCode]" alt="weather icon">
+                <img :src="iconList[iconCode]" alt="weather icon">
 
         </div>
 
         <div class="report">
 
-            <div class="temperature">{{ weather.temp + "&#176;c" }}</div>
+            <div class="temperature">{{ temperature  + "&#176;c" }}</div>
 
-            <div class="weather">{{ weather.description }}</div>
+            <div class="weather">{{ weatherDescription }}</div>
 
         </div>
 
@@ -19,7 +19,8 @@
 </template>
 
 <script>
-import $store from '../store/store';
+import { mapState } from 'vuex';
+
 export default {
 
     name: 'climate',
@@ -28,8 +29,6 @@ export default {
 
         return {
 
-            weather: {},
-            
             iconList: {
                 '01d' : require("../assets/sun.png"),
                 '01n' : require("../assets/moon.png"),
@@ -54,37 +53,13 @@ export default {
 
     },
 
-    mounted() {
+    computed: {
 
-      this.getWeather();
-
-    },
-
-    methods: {
-
-        async getWeather() {
-
-        let self = this;
-
-            try {
-
-                const response = await fetch('http://api.openweathermap.org/data/2.5/weather?q=Tehran&units=metric&appid=59047e5b5fb99d3b3a17ffa14fe1730d');
-                const myJson = await response.json();
-                self.weather.description = myJson.weather[0].description;
-                self.weather.iconCode = myJson.weather[0].icon;
-                self.weather.temp = Math.floor(myJson.main.temp);
-
-                $store.commit('defineSunsetHours', myJson.sys.sunset);
-                $store.commit('defineSunsetMinutes', myJson.sys.sunset);
-                
-
-            } catch (error) {
-
-                alert('Check your network connection or refresh the page later.');
-
-            }
-
-        }
+        ...mapState([
+            'weatherDescription',
+            'temperature',
+            'iconCode'
+        ])
 
     },
 
