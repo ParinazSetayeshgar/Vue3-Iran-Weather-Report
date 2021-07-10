@@ -1,11 +1,12 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
+import moment from 'moment';
 
 export default createStore({
 
     state: {
 
-        currentDate: new Date(),
+        currentDate: new moment(),
         weatherDescription: '',
         temperature: '',
         iconCode: '',
@@ -57,39 +58,33 @@ export default createStore({
     
                     resolve(response); 
     
-               }, error => {
-    
-                    alert(error + ' Check your network connection or refresh the page later.');
-                   
+               })
+                .catch(error => {
+
+                    alert(error + ' [Check your network connection or refresh the page later.]');
+
                     reject(error);
     
-                })
-    
+                });
+
             })
-    
-        }
-    
+
+        }        
+
     },
 
     getters: {
 
         getDate(state) {
-            return state.currentDate.toString()
-                                    .split(' ')
-                                    .slice(0,4)
-                                    .join(' ');
+            return state.currentDate.format('ddd MMMM Do YYYY');
         },
 
         getcurrentHours(state) {
-            return state.currentDate.toString()
-                                    .split(' ')[4]
-                                    .split(":")[0];
+            return state.currentDate.format('HH');
         },
 
         getcurrentMinutes(state) {
-            return state.currentDate.toString()
-                                    .split(' ')[4]
-                                    .split(":")[1];
+            return state.currentDate.format('mm');
         }
 
     }
