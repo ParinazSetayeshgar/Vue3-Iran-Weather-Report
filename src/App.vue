@@ -21,7 +21,7 @@
 <script>
 import info from './components/info.vue';
 import currentTime from './components/currentTime.vue';
-import climate from './components/climate.vue'
+import climate from './components/climate.vue';
 import { mapGetters, mapState } from 'vuex';
 
 export default {

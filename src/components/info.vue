@@ -1,7 +1,7 @@
 <template>
   <div class="info">
 
-    <div class="tehran">Tehran</div>
+    <citiesMenu></citiesMenu>
 
     <div class="today">{{ getDate }}</div>
 
@@ -9,10 +9,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
+import citiesMenu from './citiesMenu'
 export default {
 
   name: 'info',
+
+  components: {
+
+    citiesMenu
+
+  },
 
   computed: {
 
