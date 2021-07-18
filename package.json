@@ -12,7 +12,7 @@
     "core-js": "^3.6.5",
     "moment": "^2.29.1",
     "vue": "^3.0.0",
-    "vue-countries-cities": "^1.0.0",
+    "vue3-country-region-select": "^1.0.0",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
@@ -22,10 +22,7 @@
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0",
-    "node-sass": "^6.0.1",
-    "sass": "^1.35.2",
-    "sass-loader": "^10.2.0"
+    "eslint-plugin-vue": "^7.0.0"
   },
   "eslintConfig": {
     "root": true,

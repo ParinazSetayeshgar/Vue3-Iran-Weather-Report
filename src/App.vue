@@ -22,7 +22,7 @@
 import info from './components/info.vue';
 import currentTime from './components/currentTime.vue';
 import climate from './components/climate.vue';
-import { mapGetters, mapState } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
 
@@ -41,12 +41,9 @@ export default {
     ...mapState([
         'sunsetHours',
         'sunsetMinutes',
+        'currentHours',
+        'currentMinutes',
         'isDayTime'
-    ]),
-
-    ...mapGetters([
-        'getcurrentHours',
-        'getcurrentMinutes',
     ])
 
   },
@@ -55,25 +52,13 @@ export default {
 
     defineBackgroundImage() {
 
-      if (this.getcurrentHours < this.sunsetHours) {
+      if (this.isDayTime === true) {
 
           document.body.className = 'day';
 
-      } else if (this.getcurrentHours == this.sunsetHours) {
-
-        if (this.getcurrentMinutes < this.sunsetMinutes) {
-
-            document.body.className = 'day';
-
-        } else {
+      } else if (this.isDayTime === false) {
 
             document.body.className = 'night';
-
-        }
-
-      } else {
-
-          document.body.className = 'night';
 
       }
 
@@ -82,18 +67,14 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch('getWeather');
+    this.$store.dispatch('getWeather', 'Tehran');
   },
 
   
 
   watch: {
 
-    sunsetMinutes() {
-        this.defineBackgroundImage();
-    },
-
-    sunsetMinutess() {
+    isDayTime() {
         this.defineBackgroundImage();
     }
 
@@ -109,7 +90,7 @@ export default {
     font-family: 'Roboto';
     margin: 0;
     padding: 0;
-    color: whitesmoke;
+    color:whitesmoke;
 }
 
 html {

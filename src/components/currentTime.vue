@@ -1,22 +1,22 @@
 <template>
     <div class="time">
 
-        {{ getcurrentHours + ":" + getcurrentMinutes }}
+        {{ currentHours + ":" + currentMinutes }}
         
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 export default {
 
     name: 'currentTime',
 
     computed: {
 
-        ...mapGetters([
-            'getcurrentHours',
-            'getcurrentMinutes'
+        ...mapState([
+            'currentHours',
+            'currentMinutes'
         ])
 
     }

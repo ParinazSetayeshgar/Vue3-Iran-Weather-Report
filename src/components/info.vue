@@ -10,7 +10,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import citiesMenu from './citiesMenu'
+import citiesMenu from './citiesMenu';
 export default {
 
   name: 'info',
@@ -19,6 +19,15 @@ export default {
 
     citiesMenu
 
+  },
+
+  data() {
+
+    return{
+      country: '',
+      region: ''
+    }
+    
   },
 
   computed: {
