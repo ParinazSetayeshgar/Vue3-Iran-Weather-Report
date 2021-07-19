@@ -91,7 +91,7 @@ export default createStore({
 
             return new Promise((resolve, reject) => {
                
-               axios("http://api.openweathermap.org/data/2.5/weather?q="+ city + "&units=metric&appid=59047e5b5fb99d3b3a17ffa14fe1730d")
+               axios("http://api.openweathermap.org/data/2.5/weather?q="+ city.toString() + "&units=metric&appid=59047e5b5fb99d3b3a17ffa14fe1730d")
                .then(response => {
     
                     commit('defineWeatherDescription', response.data.weather[0].description);

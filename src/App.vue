@@ -67,7 +67,7 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch('getWeather', 'Tehran');
+    this.$store.dispatch('getWeather', 'Alborz');
   },
 
   

@@ -5,12 +5,15 @@
     :class="{ menuDayBackground: isDayTime, menuNightBackground: isNightTime }"
     v-model="region"
     :country="country"
-    :region="region" />
+    :region="region"
+    :regionName="true"
+    :removePlaceholder="true" />
   
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import { normalizeDiacritics } from 'normalize-text';
 export default {
 
   name: 'citiesMenu',
@@ -33,15 +36,49 @@ export default {
 
   },
 
+  methods: {
+
+    changeRegionName (regionName) {
+
+      switch(regionName) {
+
+        case 'Āz̄arbāyjān-e Gharbī':
+          regionName = 'Orūmīyeh';
+          break;
+
+        case 'Āz̄arbāyjān-e Sharqī':  
+          regionName = 'Tabriz';
+          break;
+
+        case 'Sīstān va Balūchestān':
+          regionName = 'Zahedan';
+          break;
+
+        case 'Chahār Maḩāl va Bakhtīārī':
+        case 'Khorāsān-e Jonūbī':
+        case 'Khorāsān-e Shomālī':
+        case 'Kohgīlūyeh va Bowyer Aḩmad':
+        case 'Kordestān':
+          regionName = 'Ostān-e ' + regionName;
+          break;  
+
+      }
+
+      return normalizeDiacritics(regionName);
+
+    }
+
+  },
+
   watch: {
 
     region() {
-      this.$store.dispatch('getWeather', this.region);
+      console.log(this.region);
+      this.$store.dispatch('getWeather', this.changeRegionName(this.region));
     }
 
   }
 
-  
 }
 </script>
 
@@ -58,6 +95,10 @@ export default {
   font-size:2rem;
   font-family: 'Roboto';
   appearance: none;
+  cursor: pointer;
+}
+.region option {
+  font-family: 'Roboto';
 }
 .menuDayBackground:focus {
   background-color: rgb(100, 181, 237);
