@@ -1,9 +1,8 @@
 On this branch:
 
-The project in the main branch is converting to Vue3 project.
-Converting has been done through Vue CLI & SFC concepts.
+The project is going to show current weather of whole Iran Regions.
 
-Also Vuex library is used for dealing data through components.
+Vue3-country-region-select library is used for creating dropdown menu of regions.
 
 For ruuning the project:
 1) Clone the project.
