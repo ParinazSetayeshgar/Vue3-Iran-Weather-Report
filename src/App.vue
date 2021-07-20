@@ -104,24 +104,17 @@ body {
 }
 
 .day {
-    background-image: url('./assets/day.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
+  background-color: rgb(100, 181, 237);
 }
 
 .night {
-    background-image: url('./assets/night.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
+  background-color: rgb(117, 121, 132);
 }
 
 header {
     display: flex;
     justify-content: space-around;
+    align-content: center;
     font-size: 4rem;
     height: 100px;
     padding: 20px;
