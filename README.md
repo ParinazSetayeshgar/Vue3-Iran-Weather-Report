@@ -10,7 +10,8 @@ Normlize-text library is used for normilizing name of regions to get proper API 
 
 For ruuning the project:
 1) Clone the project.
-2) Install packages in dependencies section of package.json file in project root directory through Terminal.
+
+3) Install packages in dependencies section of package.json file in project root directory through Terminal.
 
         npm install
 
