@@ -14,7 +14,6 @@ For ruuning the project:
 
         npm install
 
-
 3) Run the command below in Terminal. Make sure you are in the project root directory. This will run the Vue project on local host.
 
         npm run serve
