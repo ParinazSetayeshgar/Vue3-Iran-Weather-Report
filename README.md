@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 On this branch:
 
+=======
+# Vue3-Iran-Weather-Report
+>>>>>>> 5c7b16e (Create README.md)
 The project is going to show current weather of whole Iran Regions.
 
 Vue3-country-region-select library is used for creating dropdown menu of regions.
