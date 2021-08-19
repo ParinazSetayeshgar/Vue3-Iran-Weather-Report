@@ -1,9 +1,11 @@
 # Vue3-Iran-Weather-Report
-The project is going to show current weather of whole Iran Regions.
+The project is going to show current weather of whole Iran regions.
 
 Vue3-country-region-select library is used for creating dropdown menu of regions.
 
-Normlize-text library is used for normilizing name of regions to get proper API respond. Also some changes will be made to few names of regions according to names which API support by switch-case statements in changeRegionName method of citiesMenu.vue component.
+Openweather API is used for fetching weather data by fetch() method & AJAX technology.
+
+Normlize-text library is used for normilizing name of regions to get proper API response. Also some changes will be made to few names of regions according to names which API support by switch-case statements in changeRegionName method of citiesMenu.vue component.
 
 For ruuning the project:
 1) Clone the project.
