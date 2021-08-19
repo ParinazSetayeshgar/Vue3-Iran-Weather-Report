@@ -108,7 +108,7 @@ export default createStore({
                })
                 .catch(error => {
 
-                    alert(error + ' [Check your network connection or refresh the page later.]');
+                    alert(error + '[Check your network connection or refresh the page later.]');
 
                     reject(error);
     

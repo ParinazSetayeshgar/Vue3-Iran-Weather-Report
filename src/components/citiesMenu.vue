@@ -73,7 +73,6 @@ export default {
   watch: {
 
     region() {
-      console.log(this.region);
       this.$store.dispatch('getWeather', this.changeRegionName(this.region));
     }
 
@@ -88,13 +87,13 @@ export default {
 .region {
   background-color: transparent;
   height: 100%;
+  width: 269;
   text-align-last: center;
   border: 0 transparent;
   outline: 0;
   color:whitesmoke;
   font-size:2rem;
   font-family: 'Roboto';
-  appearance: none;
   cursor: pointer;
 }
 .region option {

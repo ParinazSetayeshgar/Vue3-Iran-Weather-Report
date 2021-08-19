@@ -1,5 +1,5 @@
 <template>
-    <div>
+    
 
       <header>
 
@@ -15,7 +15,7 @@
           Developed By Parinaz Setayeshgar
       </footer>
 
-    </div>
+    
 </template>
 
 <script>
@@ -88,19 +88,14 @@ export default {
 
 * {
     font-family: 'Roboto';
-    margin: 0;
-    padding: 0;
     color:whitesmoke;
 }
 
-html {
+html, body {
     height: 100%;
-    overflow: auto;
-}
-
-body {
-    min-height: 100vh ;
-    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .day {
@@ -125,15 +120,18 @@ footer {
     color: white;
     font-size: 15px;
     font-weight: 700;
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    bottom: 10px;
+    margin: 0;
+    padding: 0;
     width: 100%;
-    height: 1.5rem; 
 }
 
-@media (min-width: 481px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
     header {
         font-size:3rem;
+        flex-direction: column;
+        padding: 50px 50px 30px 50px;
     }
 }
 </style>

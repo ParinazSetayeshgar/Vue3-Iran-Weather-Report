@@ -72,6 +72,8 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 50px 20px 20px 20px;
+    margin: 0;
 }
 
 .icon {
@@ -80,6 +82,7 @@ main {
     align-items: center;
     height: 20%;
     width: 100%;
+    padding-bottom: 0;
    }
 
 img {
@@ -92,25 +95,32 @@ img {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    margin: 30px;
+    padding: 0px;
+    margin: 0px;
 
 }
 .temperature {
     font-size:5rem;
+    padding-top: 20px;
 }
 
 .weather {
     font-size: 3rem;
 }
 
-@media (min-width: 481px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
     .temperature {
         font-size:4rem;
     }
 
     .weather {
         font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    img {
+        height: 10em;
     }
 }
 </style>

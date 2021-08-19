@@ -47,13 +47,15 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 .today {
     font-size: 1.75rem;
 }
 
-@media (min-width: 481px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
     .today {
         font-size: 1.25rem;
     }
